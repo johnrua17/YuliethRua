@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil Profesional - Yulieth Rua</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            scroll-behavior: smooth;
+            perspective: 1px;
+            transform-style: preserve-3d;
+            height: 100vh;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        .parallax-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            perspective: 8px;
+            perspective-origin: 0%;
+        }
+        .parallax-layer {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .parallax-layer-back {
+            transform: translateZ(-6px) scale(1.75);
+            background: url('https://source.unsplash.com/1600x900/?abstract,technology') no-repeat center center;
+            background-size: cover;
+        }
+        .parallax-layer-base {
+            transform: translateZ(0);
+        }
+        .container {
+            width: 90%;
+            margin: auto;
+            overflow: hidden;
+            position: relative;
+        }
+        header {
+            background: rgba(31, 31, 31, 0.8);
+            color: #fff;
+            padding: 10px 0;
+            border-bottom: #f0c040 3px solid;
+            position: fixed;
+            width: 100%;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        header.scrolled {
+            background: rgba(31, 31, 31, 0.95);
+            padding: 5px 0;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+            transition: color 0.3s ease;
+        }
+        header ul {
+            padding: 0;
+            list-style: none;
+        }
+        header li {
+            display: inline;
+            padding: 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+        }
+        header nav ul {
+            display: flex;
+            align-items: center;
+            margin: 0;
+        }
+        header nav ul li {
+            padding: 10px 20px;
+        }
+        #menu-toggle {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            header nav {
+                float: none;
+                text-align: right;
+            }
+            header nav ul {
+                flex-direction: column;
+                display: none;
+                width: 100%;
+                text-align: right;
+            }
+            
+            header nav ul li {
+                display: block;
+                padding: 10px 0;
+            }
+            #menu-toggle {
+                display: block;
+                position: absolute;
+                right: 20px;
+                top: 20px;
+            }
+        }
+        #showcase {
+            min-height: 100vh;
+            text-align: center;
+            color: #fff;
+            padding: 50px 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        #showcase::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: linear-gradient(45deg, rgba(255, 165, 2, 0.7), rgba(30, 144, 255, 0.7));
+            transform-origin: center;
+            animation: rotate 20s linear infinite;
+        }
+        @keyframes rotate {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        #showcase .container {
+            position: relative;
+            z-index: 1;
+        }
+        #showcase img {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            margin-top: 20px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translatey(0px); }
+            50% { transform: translatey(-20px); }
+            100% { transform: translatey(0px); }
+        }
+        #showcase h1 {
+            margin-top: 20px;
+            font-size: 55px;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+        }
+        #showcase p {
+            font-size: 20px;
+            opacity: 0;
+            animation: fadeInUp 1s forwards;
+            animation-delay: 0.5s;
+        }
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .content-section {
+            padding: 50px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            transform: translateZ(0);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .content-section:hover {
+            transform: translateZ(10px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        footer {
+            background: rgba(51, 51, 51, 0.9);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 10px;
+        }
+        .social-links a {
+            background-color: #333;
+            color: #fff;
+            padding: 15px;
+            margin: 0 10px;
+            border-radius: 50%;
+            text-decoration: none;
+            font-size: 24px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            line-height: 24px;
+            text-align: center;
+        }
+        .social-links a:hover {
+            background-color: #f0c040;
+            transform: translateY(-5px) scale(1.1);
+        }
+        header a:hover {
+            color: #f0c040;
+        }
+    </style>
+</head>
+<body>
+    <div class="parallax-container">
+        <div class="parallax-layer parallax-layer-back"></div>
+        <div class="parallax-layer parallax-layer-base">
+            <header>
+                <div class="container">
+                    <div id="branding">
+                        <h1>Perfil Profesional</h1>
+                    </div>
+                    <div id="menu-toggle">&#9776;</div>
+                    <nav>
+                        <ul>
+                            <li><a href="#inicio">Inicio</a></li>
+                            <li><a href="#sobre-mi">Sobre Mí</a></li>
+                            <li><a href="#experiencia">Experiencia</a></li>
+                            <li><a href="#habilidades">Habilidades</a></li>
+                            <li><a href="#proyectos">Proyectos</a></li>
+                            <li><a href="#contacto">Contacto</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </header>
+            <section id="inicio">
+                <div id="showcase">
+                    <div class="container">
+                        <img src="Yulieth.jpg" alt="Foto de Yulieth Rua">
+                        <h1>Yulieth Edilma Rua Cortes</h1>
+                        <p>Administradora de empresas egresada de la Universidad Libre de Cali, Valle del Cauca, Colombia</p>
+                    </div>
+                </div>
+            </section>
+            <section id="sobre-mi" class="content-section">
+                <div class="container">
+                    <h2>Sobre Mí</h2>
+                    <p>Breve descripción sobre ti y tu carrera profesional.</p>
+                </div>
+            </section>
+            <section id="experiencia" class="content-section">
+                <div class="container">
+                    <h2>Experiencia</h2>
+                    <ul>
+                        <li>Trabajo Actual - Descripción del puesto</li>
+                        <li>Trabajo Anterior - Descripción del puesto</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="habilidades" class="content-section">
+                <div class="container">
+                    <h2>Habilidades</h2>
+                    <ul>
+                        <li>Habilidad 1</li>
+                        <li>Habilidad 2</li>
+                    </ul>
+                </div>
+            </section>
+            <section id="proyectos" class="content-section">
+                <div class="container">
+                    <h2>Proyectos</h2>
+                    <p>Descripción de proyectos relevantes en los que has trabajado.</p>
+                </div>
+            </section>
+            <section id="contacto" class="content-section">
+                <div class="container">
+                    <h2>Contacto</h2>
+                    <div class="social-links">
+                        <a href="mailto:tu-email@example.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <a href="https://www.facebook.com/tu-perfil" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/tu-perfil" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/tu-perfil" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </section>
+            <footer>
+                <p>&copy; 2024 Yulieth Rua. Todos los derechos reservados.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.querySelector('nav ul');
+        menuToggle.addEventListener('click', () => {
+            nav.style.display = nav.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 0);
+        });
+    </script>
+</body>
+</html>
